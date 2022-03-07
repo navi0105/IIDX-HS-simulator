@@ -1,4 +1,7 @@
-var hiSpeed_status;
+var hs_status;
+var curr_status = [];
+var next_status = [];
+var log = '';
 
 document.addEventListener('DOMContentLoaded', function(){
     //checkbox event
@@ -20,13 +23,6 @@ document.addEventListener('DOMContentLoaded', function(){
 
     //start simulation
     document.getElementById('start_btn').onclick = startSimulation;
-
-    //action list
-    document.getElementById('bpmChange_action').onclick = bpmModify;
-    document.getElementById('keyPress_action').onclick = pressKey;
-    document.getElementById('scratchPush_action').onclick = scratchPush;
-    document.getElementById('pressStartTwice_action').onclick = pressStartTwice;
-    document.getElementById('switchHsMode_action').onclick = switchHsMode;
 }, false);
 
 function fhsStartCheck(){
@@ -130,8 +126,17 @@ function startSimulation(){
 
     let vision_mode = Number(using_sud) + 2*Number(using_lift);
     
-    hiSpeed_status = new hiSpeedStatus(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs);
-    hiSpeed_status.showStatus()
+    //initialize
+    curr_status = [];
+    next_status = [];
+    log = ''
+
+    hs_status = new hiSpeedStatus(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs);
+    hs_status.showStatus()
+    log += hs_status.statusToLog();
+    printLogHistory();
+
+    curr_status.push(hs_status);
 }
 
 function getSudden(){

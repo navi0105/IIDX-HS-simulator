@@ -4,36 +4,6 @@
         <meta charset="UTF-8"/>
         <meta title="IIDX Hi-Speed Simulator"/>
         <style type="text/css">
-            /*
-            body{
-                font-family: Arial, Helvetica, sans-serif;
-                font-size: 14px;
-            }
-
-            legend{
-                margin-left: 10px;
-                font-weight: bold;
-                font-size: 20px;
-            }
-
-            fieldset li{
-                margin: 5px;
-                line-height: 30px;
-            }
-
-            label {
-                float: left;
-                width: 10em;
-                margin-right: 1em;
-            }
-
-            
-
-            .fieldset_1{
-                width: 400px;
-                background-color: rgb(221, 220, 219);
-            }
-        */
             body{
                 font-family: monospace;
                 font-size: 16px;
@@ -49,7 +19,7 @@
                 margin: 10px;
             }
 
-            .fieldset_1{
+            .fieldset_initial{
                 position: absolute;
                 left: 30px;
                 top: 70px;
@@ -58,7 +28,7 @@
                 margin: 20px;
             }
 
-            .fieldset_2{
+            .fieldset_status{
                 position: absolute;
                 left: 400px;
                 top: 70px;
@@ -67,7 +37,7 @@
                 margin: 20px;
             }
 
-            .fieldset_3{
+            .fieldset_action{
                 position: absolute;
                 left: 30px;
                 top: 460px;
@@ -76,6 +46,15 @@
                 margin: 20px;
                 padding-top: 15px;
                 padding-bottom: 0.6px;
+            }
+
+            .fieldset_log{
+                position: absolute;
+                left: 770px;
+                top: 70px;
+                height: 700px;
+                width: 400px;
+                margin: 20px;
             }
 
             .field_content_1{
@@ -90,18 +69,25 @@
                 background: #CCC;
             }
 
-            .fieldset_2 pre{
+            .fieldset_status pre{
                 font-size: 16px;
                 line-height: 30px;
             }
 
-            .fieldset_3 fieldset{
+            .fieldset_action fieldset{
                 height: 30px; 
                 margin: 5px;
             }
 
-            .fieldset_3 pre{
+            .fieldset_action pre{
                 margin-top: 10px;
+            }
+
+            .fieldset_log textarea{
+                width: 94%;
+                height: 97%;
+                margin: 10px;
+                resize: none;
             }
         </style>
     </head>
@@ -109,7 +95,7 @@
     <body>        
         <div class="title">IIDX Hi-Speed Simulator</div>
         <br/>
-        <fieldset class="fieldset_1">
+        <fieldset class="fieldset_initial">
             <legend>Initial Status</legend>
             <div class="field_content_1">                
                 <input type="checkbox" id="fhs_start" checked></input>
@@ -186,13 +172,13 @@
             </div> 
         </fieldset>
         
-        <fieldset class="fieldset_2">
+        <fieldset class="fieldset_status">
             <legend>Current Status</legend>
             <pre id="status">
             </pre>
         </fieldset>
 
-        <fieldset class="fieldset_3">
+        <fieldset class="fieldset_action">
             <legend>Action List</legend>
             <fieldset>
                 <pre>BPM becomes <input type="number" id="BPM_after_changes" style="width: 50px;"> </input><button id="bpmChange_action">Excute</button></pre>
@@ -214,8 +200,14 @@
             </fieldset>
         </fieldset>
         
+        <fieldset class="fieldset_log">
+            <legend>Log</legend>
+            <textarea id="log_history" readonly></textarea>
+        </fieldset>
+
     </body>
 </html>
 
 <script src="./hs_class.js"></script>
 <script src="./initialEvent.js"></script>
+<script src="./actionEvent.js"></script>

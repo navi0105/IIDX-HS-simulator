@@ -174,6 +174,23 @@ class hiSpeedStatus{
         document.getElementById('status').textContent = statusLog;
     }
     
+    statusToLog(){
+        let statusLog = '*** ';
+        statusLog += this.curr_action + ' ***\n';
+        statusLog += 'Hi-Speed mode: ' + hs_mode2name[this.hs_mode] + '\n';
+        statusLog += 'BPM: ' + this.bpm + '\n'
+        statusLog += 'Green Number: ' +  (Number(this.green_number)).toFixed(0) + '\n'
+        statusLog += 'SUD+: ' + this.sudden + '\n';
+        statusLog += 'Lift: ' + this.lift + '\n';
+        statusLog += 'HS: ' + (this.hs).toFixed(2) + '\n';
+        if(this.hs_mode == 1){
+            statusLog += 'NHS Gear: ' + this.nhs_gear + '\n'
+        }
+        statusLog += 'Real Scroll Time:' + (this.greenNumberToRealTime()).toFixed(2) + '(ms)\n'
+        statusLog += '===================================\n'
+        return statusLog;
+    }
+
     bpmChange(new_bpm){            
             this.green_number = this.green_number * this.bpm / new_bpm;
             this.bpm = new_bpm;
@@ -480,7 +497,7 @@ class hiSpeedStatus{
             }
         }
 
-        this.curr_action = 'Turn Scratch ' + scratch_direction + '(Movement:)' + initial_movement;
+        this.curr_action = 'Turn Scratch ' + scratch_direction + '(Movement:' + initial_movement + ')';
     }
 
     //press start button twice quickly to open/close SUD+

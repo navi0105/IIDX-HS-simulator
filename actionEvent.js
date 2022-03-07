@@ -10,8 +10,10 @@ document.addEventListener('DOMContentLoaded', function(){
 //ACTION LIST
 function bpmModify(){
     let next_BPM = Number(document.getElementById('BPM_after_changes').value);
-    hiSpeed_status.bpmChange(next_BPM)
-    hiSpeed_status.showStatus();
+    hs_status.bpmChange(next_BPM)
+    hs_status.showStatus();
+    log += hs_status.statusToLog();
+    printLogHistory()
 }
 
 function pressKey(){
@@ -19,24 +21,36 @@ function pressKey(){
     let key_count = Number(document.getElementById('key_count').value);
     let press_times = Number(document.getElementById('press_times').value);
 
-    hiSpeed_status.pressKey(key_type, key_count, press_times);
-    hiSpeed_status.showStatus();
+    hs_status.pressKey(key_type, key_count, press_times);
+    hs_status.showStatus();
+    log += hs_status.statusToLog();
+    printLogHistory()
 }
 
 function scratchPush(){
     let scr_movement = document.getElementById('scr_movement').value == ""? undefined: Number(document.getElementById('scr_movement').value);
 
-    hiSpeed_status.scratchPush(scr_movement);
-    hiSpeed_status.showStatus();
+    hs_status.scratchPush(scr_movement);
+    hs_status.showStatus();
+    log += hs_status.statusToLog();
+    printLogHistory()
 }
 
 function pressStartTwice(){
-    hiSpeed_status.pressStartTwice();
-    hiSpeed_status.showStatus();
+    hs_status.pressStartTwice();
+    hs_status.showStatus();
+    log += hs_status.statusToLog();
+    printLogHistory()
 
 }
 
 function switchHsMode(){
-    hiSpeed_status.switchHsMode();
-    hiSpeed_status.showStatus();
+    hs_status.switchHsMode();
+    hs_status.showStatus();
+    log += hs_status.statusToLog();
+    printLogHistory()
+}
+
+function printLogHistory(){
+    document.getElementById('log_history').value = log;
 }
