@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta title="IIDX Hi-Speed Simulator"/>
+        <style type="text/css">
+            /*
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 14px;
+            }
+
+            legend{
+                margin-left: 10px;
+                font-weight: bold;
+                font-size: 20px;
+            }
+
+            fieldset li{
+                margin: 5px;
+                line-height: 30px;
+            }
+
+            label {
+                float: left;
+                width: 10em;
+                margin-right: 1em;
+            }
+
+            
+
+            .fieldset_1{
+                width: 400px;
+                background-color: rgb(221, 220, 219);
+            }
+        */
+            body{
+                font-family: monospace;
+                font-size: 16px;
+            }
+
+            select{
+                width: 50px;
+            }
+
+            .title{
+                font-size: 36px;
+                font-weight: bold;
+                margin: 10px;
+            }
+
+            .fieldset_1{
+                position: absolute;
+                left: 30px;
+                top: 70px;
+                height: 350px;
+                width: 300px;
+                margin: 20px;
+            }
+
+            .fieldset_2{
+                position: absolute;
+                left: 400px;
+                top: 70px;
+                width: 300px;
+                height: 350px;
+                margin: 20px;
+            }
+
+            .fieldset_3{
+                position: absolute;
+                left: 30px;
+                top: 460px;
+                height: 310px;
+                width: 671px;
+                margin: 20px;
+                padding-top: 15px;
+                padding-bottom: 0.6px;
+            }
+
+            .field_content_1{
+                line-height: 30px;
+            }
+
+            input[type="number"] {
+                width: 100px;
+            }
+
+            input[type="text"]:disabled{
+                background: #CCC;
+            }
+
+            .fieldset_2 pre{
+                font-size: 16px;
+                line-height: 30px;
+            }
+
+            .fieldset_3 fieldset{
+                height: 30px; 
+                margin: 5px;
+            }
+
+            .fieldset_3 pre{
+                margin-top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>        
+        <div class="title">IIDX Hi-Speed Simulator</div>
+        <br/>
+        <fieldset class="fieldset_1">
+            <legend>Initial Status</legend>
+            <div class="field_content_1">                
+                <input type="checkbox" id="fhs_start" checked></input>
+                <label for="fhs_start">Start With FHS mode</label>
+                <br/>
+                
+                <label for="start_green_number">Green Number:</label>
+                <input type="number" name="start_green_number" id="start_green_number" min="0"></input>
+                <br/>
+
+                <input type="checkbox" id="using_sud"></input>
+                <label for="using_sud">Using SUD+</label>
+                <br/>
+                <label for="sudden">SUD+:</label>
+                <input type="number" name="sudden" id="sudden" placeholder="41~999" min="41" max="999" disabled></input>
+                <br/>
+
+                <input type="checkbox" id="using_lift" ></input>
+                <label for="using_lift">Using Lift</label>
+                <br/>
+                <label for="lift">Lift:</label>
+                <input type="number" name="lift" id="lift" placeholder="0~834" min="0" max="829" disabled></input>
+                <br/>
+
+                <label for="bpm">BPM:</label>
+                <input type="number" name="bpm" placeholder="initial BPM" id="bpm" min="1"></input>
+                <br/>            
+
+                <label for="hs">HS:</label>
+                <input type="number" name="hs" id="hs" placeholder="0.50~10.00" step="0.01" min="0.50" max="10.0"></input>
+                <br/>
+
+                <input type="checkbox" id="using_chs" >Using Classic Hi-Speed</input><br/>
+                <label for="chs_gear">CHS Gear:</label>
+                <select name="chs_gear" id="chs_gear" disabled>
+                    <option value="4.00">4.00</option>
+                    <option value="3.75">3.75</option>
+                    <option value="3.50">3.50</option>
+                    <option value="3.25">3.25</option>
+                    <option value="3.00">3.00</option>
+                    <option value="2.75">2.75</option>
+                    <option value="2.50">2.50</option>
+                    <option value="2.25">2.25</option>
+                    <option value="2.00">2.00</option>
+                    <option value="1.50">1.50</option>
+                    <option value="1.00">1.00</option>
+                </select>
+                <label for="nhs_gear">NHS Gear:</label>
+                <select name="nhs_gear" id="nhs_gear" disabled>
+                    <option value="20">20</option>
+                    <option value="19">19</option>
+                    <option value="18">18</option>
+                    <option value="17">17</option>
+                    <option value="16">16</option>
+                    <option value="15">15</option>
+                    <option value="14">14</option>
+                    <option value="13">13</option>
+                    <option value="12">12</option>
+                    <option value="11">11</option>
+                    <option value="10">10</option>
+                    <option value="9">9</option>
+                    <option value="8">8</option>
+                    <option value="7">7</option>
+                    <option value="6">6</option>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                </select>
+                <br/>
+
+                <button id="start_btn" style="float: right; margin-top: 10px; margin-right: 20px;">Start</button>
+            </div> 
+        </fieldset>
+        
+        <fieldset class="fieldset_2">
+            <legend>Current Status</legend>
+            <pre id="status">
+            </pre>
+        </fieldset>
+
+        <fieldset class="fieldset_3">
+            <legend>Action List</legend>
+            <fieldset>
+                <pre>BPM becomes <input type="number" id="BPM_after_changes" style="width: 50px;"> </input><button id="bpmChange_action">Excute</button></pre>
+            </fieldset>
+            <fieldset>
+                <pre>Start + <select id="key_type" style="width: 60px;">
+                    <option value="1">Black</option>
+                    <option value="-1">White</option>
+                </select> key * <input type="number" id="key_count" placeholder="count" style="width: 50px;"/> for <input type="number" id="press_times" placeholder="times"  style="width: 50px;"/> time(s) <button id="keyPress_action">Excute</button></pre>
+            </fieldset>
+            <fieldset>
+                <pre>Start + Push/Pull Scratch(Movement:<input type="number" id="scr_movement" style="width: 50px;"/>) <button id="scratchPush_action">Excute</button></pre>
+            </fieldset>
+            <fieldset>
+                <pre>Start * 2(SUD+ On/Off) <button id="pressStartTwice_action">Excute</button></pre>
+            </fieldset>
+            <fieldset>
+                <pre>Start + Effect(Change Hi-Speed Mode) <button id="switchHsMode_action">Excute</button></pre>
+            </fieldset>
+        </fieldset>
+        
+    </body>
+</html>
+
+<script src="hs.js"></script>
+<script src="initialStatusEvent.js"></script>
+<script src="actionListEvent.js"></script>
