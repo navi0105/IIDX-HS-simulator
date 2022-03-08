@@ -1,0 +1,85 @@
+body{
+    font-family: monospace;
+    font-size: 16px;
+}
+
+select{
+    width: 50px;
+}
+
+.title{
+    font-size: 36px;
+    font-weight: bold;
+    margin: 10px;
+}
+
+.fieldset_initial{
+    position: absolute;
+    left: 2%;
+    top: 7%;
+    height: 48%;
+    width: 22%;
+    margin: 1%;
+}
+
+.fieldset_status{
+    position: absolute;
+    left: 27%;
+    top: 7%;
+    height: 48%;
+    width: 22%;
+    margin: 1%;
+}
+
+.fieldset_action{
+    position: absolute;
+    left: 2%;
+    top: 60%;
+    height: 43%;
+    width: 47%;
+    margin: 1%;
+    padding-top: 15px;
+    padding-bottom: 0.6px;
+}
+
+.fieldset_log{
+    position: absolute;
+    left: 52%;
+    top: 7%;
+    height: 96%;
+    width: 400px;
+    margin: 1%;
+}
+
+.field_content_1{
+    line-height: 30px;
+}
+
+input[type="number"] {
+    width: 100px;
+}
+
+input[type="text"]:disabled{
+    background: #CCC;
+}
+
+.fieldset_status pre{
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.fieldset_action fieldset{
+    height: 30px; 
+    margin: 5px;
+}
+
+.fieldset_action pre{
+    margin-top: 10px;
+}
+
+.fieldset_log textarea{
+    width: 94%;
+    height: 97%;
+    margin: 10px;
+    resize: none;
+}
