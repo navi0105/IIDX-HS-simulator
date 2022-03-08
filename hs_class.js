@@ -214,6 +214,8 @@ class hiSpeedStatus{
         //Green Number Recalculate
     //key_type: -1=white key; 1=black key
     pressKey(key_type, key_count, times){
+        this.curr_action = 'Press ' + key_type==1?'Black' : 'White' + ' key * ' + key_count + ' for ' + times + 'time(s)';
+
         switch(this.hs_mode){
             case 0://CHS
                 for(let i=0; i<key_count * times; i++){
@@ -262,11 +264,14 @@ class hiSpeedStatus{
                     this.hs = next_hs;
                 }
                 this.green_number = this.greenNumberCalculate()
+
+                if(this.vision_mode == 3 && this.sudden_enable == false){
+                    this.default_hs = this.hs;
+                    this.default_green_number_no_sud = this.green_number;
+                }
                 break;
             default:break;
         }
-
-        this.curr_action = 'Press ' + key_type==1?'Black' : 'White' + ' key * ' + key_count + ' for ' + times + 'time(s)';
     }
 
     //Start + Effect(to change HS mode)
@@ -283,6 +288,8 @@ class hiSpeedStatus{
         //Green number keep
         //SUD+/Lift keep
     switchHsMode(){
+        this.curr_action = 'Switch Hi-Speed Mode to' + this.hs_mode == 2? 'FHS mode' : (this.chs_enable ? 'CHS mode': 'NHS mode')
+
         if(this.hs_mode==2){
             if(this.chs_enable){
                 this.hs_mode = 0;
@@ -313,8 +320,6 @@ class hiSpeedStatus{
             this.default_green_number = this.green_number;
             this.default_hs = this.hs;
         }
-
-        this.curr_action = 'Switch Hi-Speed Mode to' + this.hs_mode == 2? 'FHS mode' : (this.chs_enable ? 'CHS mode': 'NHS mode')
     }
 
     //Start + Scratch Push
@@ -340,9 +345,8 @@ class hiSpeedStatus{
         if(movement == undefined){
             movement = 5;
         }
-        
-        let initial_movement = movement;
         let scratch_direction = movement >= 0? 'clockwise':'counterclockwise'
+        this.curr_action = 'Turn Scratch ' + scratch_direction + '(Movement:' + movement + ')';        
 
         if(this.hs_mode != 2){
             switch(this.vision_mode){
@@ -497,7 +501,6 @@ class hiSpeedStatus{
             }
         }
 
-        this.curr_action = 'Turn Scratch ' + scratch_direction + '(Movement:' + initial_movement + ')';
     }
 
     //press start button twice quickly to open/close SUD+
@@ -508,6 +511,7 @@ class hiSpeedStatus{
         //SUD+ value = SUD+ value before SUD+ closed
         //Green Number Recalculate
     pressStartTwice(){
+        this.curr_action = 'Press Start Key Twice';
         switch(this.vision_mode){
             //no SUD+ nor Lift
             case 0:
@@ -563,15 +567,19 @@ class hiSpeedStatus{
                 break;
             case 3:
                 if(this.sudden_enable){
-                    this.sudden_enable = false;
-                    this.default_sudden = this.sudden;
-                    this.sudden = 0;
                     if(this.hs_mode != 2){
+                        this.sudden_enable = false;
+                        this.default_sudden = this.sudden;
+                        this.sudden = 0;
                         this.green_number = this.greenNumberCalculate();
                     }
                     else{
-                        //待測
-                        this.hs = this.default_hs;
+                        this.green_number = this.default_green_number;
+                        this.hs = this.hsCalculate();
+
+                        this.sudden_enable = false;
+                        this.default_sudden = this.sudden;
+                        this.sudden = 0;
                         this.green_number = this.greenNumberCalculate();
                     }
                 }
@@ -591,6 +599,6 @@ class hiSpeedStatus{
                 break;
         }
 
-        this.curr_action = 'Press Start Key Twice';
+        
     }
 }
