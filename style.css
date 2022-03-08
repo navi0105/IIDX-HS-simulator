@@ -15,7 +15,7 @@ select{
 
 .fieldset_initial{
     position: absolute;
-    left: 2%;
+    left: 7%;
     top: 7%;
     height: 48%;
     width: 22%;
@@ -24,7 +24,7 @@ select{
 
 .fieldset_status{
     position: absolute;
-    left: 27%;
+    left: 32%;
     top: 7%;
     height: 48%;
     width: 22%;
@@ -33,7 +33,7 @@ select{
 
 .fieldset_action{
     position: absolute;
-    left: 2%;
+    left: 7%;
     top: 60%;
     height: 43%;
     width: 47%;
@@ -44,23 +44,22 @@ select{
 
 .fieldset_log{
     position: absolute;
-    left: 52%;
+    left: 57%;
     top: 7%;
     height: 96%;
-    width: 400px;
+    width: 30%;
     margin: 1%;
 }
 
 .field_content_1{
-    line-height: 175%;
-    margin: 3%;
+    line-height: 190%;
 }
 
 .field_content_1 input[type="number"] {
     width: 30%;
 }
 
-input[type="text"]:disabled{
+.field_content_1 input[type="text"]:disabled{
     background: #CCC;
 }
 
