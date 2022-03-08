@@ -1,7 +1,7 @@
 var hs_status;
-var curr_status = [];
-var next_status = [];
-var log = '';
+var prev_status_log = [];
+var next_status_log = [];
+var log_text_history = [];
 
 document.addEventListener('DOMContentLoaded', function(){
     //checkbox event
@@ -127,16 +127,11 @@ function startSimulation(){
     let vision_mode = Number(using_sud) + 2*Number(using_lift);
     
     //initialize
-    curr_status = [];
-    next_status = [];
-    log = ''
+    prev_status_log = [];
+    next_status_log = [];
 
     hs_status = new hiSpeedStatus(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs);
-    hs_status.showStatus()
-    log += hs_status.statusToLog();
-    printLogHistory();
-
-    curr_status.push(hs_status);
+    showLogs();
 }
 
 function getSudden(){

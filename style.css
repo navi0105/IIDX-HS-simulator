@@ -23,7 +23,7 @@ body{
     left: 470px;
     top: 50px;
     height: 350px;
-    width: 320px;
+    width: 350px;
     margin: 1%;
 }
 
@@ -32,13 +32,13 @@ body{
     left: 100px;
     top: 430px;
     height: 310px;
-    width: 690px;
+    width: 720px;
     margin: 1%;
 }
 
 .fieldset_log{
     position: absolute;
-    left: 840px;
+    left: 870px;
     top: 50px;
     height: 690px;
     width: 450px;

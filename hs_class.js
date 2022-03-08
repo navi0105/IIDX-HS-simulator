@@ -21,10 +21,6 @@ let nhs_gear2green = {1:1200,
     19:280,
     20:260};
 
-let hs_mode2name = {0: 'Classic Hi-Speed',
-                    1: 'Normal Hi-Speed',
-                    2: 'Floating Hi-Speed'};
-
 //Calculate Formula
     //174800*(1000-白数字)/1000=BPM*HS*緑数字
     //HS=174800 * ((1000-白数字)/1000) / (BPM*緑数字)
@@ -157,38 +153,20 @@ class hiSpeedStatus{
         return rt
     }
 
-    showStatus(){
-        let statusLog = '';
-        statusLog += this.curr_action + '\n';
-        statusLog += 'Hi-Speed mode: ' + hs_mode2name[this.hs_mode] + '\n';
-        statusLog += 'BPM: ' + this.bpm + '\n'
-        statusLog += 'Green Number: ' +  (Number(this.green_number)).toFixed(0) + '\n'
-        statusLog += 'SUD+: ' + this.sudden + '\n';
-        statusLog += 'Lift: ' + this.lift + '\n';
-        statusLog += 'HS: ' + (this.hs).toFixed(2) + '\n';
-        if(this.hs_mode == 1){
-            statusLog += 'NHS Gear: ' + this.nhs_gear + '\n'
-        }
-        statusLog += 'Real Scroll Time:' + (this.greenNumberToRealTime()).toFixed(2) + '(ms)\n'
 
-        document.getElementById('status').textContent = statusLog;
-    }
-    
     statusToLog(){
-        let statusLog = '*** ';
-        statusLog += this.curr_action + ' ***\n';
-        statusLog += 'Hi-Speed mode: ' + hs_mode2name[this.hs_mode] + '\n';
-        statusLog += 'BPM: ' + this.bpm + '\n'
-        statusLog += 'Green Number: ' +  (Number(this.green_number)).toFixed(0) + '\n'
-        statusLog += 'SUD+: ' + this.sudden + '\n';
-        statusLog += 'Lift: ' + this.lift + '\n';
-        statusLog += 'HS: ' + (this.hs).toFixed(2) + '\n';
-        if(this.hs_mode == 1){
-            statusLog += 'NHS Gear: ' + this.nhs_gear + '\n'
-        }
-        statusLog += 'Real Scroll Time:' + (this.greenNumberToRealTime()).toFixed(2) + '(ms)\n'
-        statusLog += '===================================\n'
-        return statusLog;
+        let log = {};
+        log.curr_action = this.curr_action;
+        log.hs_mode = this.hs_mode;
+        log.bpm = this.bpm;
+        log.green_number = (Number(this.green_number)).toFixed(0);
+        log.sudden = this.sudden;
+        log.lift = this.lift;
+        log.hs = this.hs.toFixed(2);
+        log.nhs_gear = this.hs_mode == 1? this.nhs_gear : -1;
+        log.real_time = (this.greenNumberToRealTime()).toFixed(2);
+
+        return log;
     }
 
     bpmChange(new_bpm){            
