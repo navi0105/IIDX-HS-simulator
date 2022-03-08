@@ -78,6 +78,7 @@ select{
 }
 
 .fieldset_log textarea{
+    font-size: 100%;
     width: 94%;
     height: 97%;
     margin: 2%;
