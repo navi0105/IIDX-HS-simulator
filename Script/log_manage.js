@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
 function printLogHistory(action_only){
     let all_log_text_history = ''
-    if(action_only){
+    if(action_only && log_text_history_action_only.length> 0 ){
         all_log_text_history += log_text_history_action_only[0]; //initial status
         all_log_text_history += '==================================\n'
         for(i=1; i<log_text_history_action_only.length; i++){
