@@ -35,7 +35,7 @@ function getStatusLog(prev, curr){
         if(curr.hs_mode == 1){
             log_text += 'NHS Gear:' + curr.nhs_gear + '\n'
         }
-        log_text += 'Real Scroll Time:' + curr.real_time + '(ms)\n'
+        log_text += 'Note Scroll Time:' + curr.real_time + '(ms)\n'
     }
     else{
         log_text += '*** ';
@@ -84,7 +84,7 @@ function getStatusLog(prev, curr){
             }            
             log_text += '\n'
         }
-        log_text += 'Real Scroll Time:' + prev.real_time + '(ms)'
+        log_text += 'Note Scroll Time:' + prev.real_time + '(ms)'
         if(prev.real_time != curr.real_time){
             log_text += '\n\t\t=>' + curr.real_time +'(ms)';
         }
