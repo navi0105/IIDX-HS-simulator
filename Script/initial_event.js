@@ -125,6 +125,7 @@ function startSimulation(){
     prev_status_log = [];
     next_status_log = [];
     log_text_history = [];
+    log_text_history_action_only = [];
 
     hs_status = new HiSpeedStatus(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs);
     showLogs();
