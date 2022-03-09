@@ -59,7 +59,7 @@ body{
 
 .fieldset_status pre{
     font-size: 100%;
-    line-height: 200%;
+    line-height: 150%;
 }
 
 .fieldset_action fieldset{
@@ -73,8 +73,9 @@ body{
 
 .fieldset_log textarea{
     font-size: 100%;
+    top: 5%;
     width: 94%;
-    height: 97%;
+    height: 93%;
     margin: 2%;
     resize: none;
 }

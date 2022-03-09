@@ -1,8 +1,3 @@
-var hs_status;
-var prev_status_log = [];
-var next_status_log = [];
-var log_text_history = [];
-
 document.addEventListener('DOMContentLoaded', function(){
     //checkbox event
     document.getElementById('fhs_start').onchange = fhsStartCheck;
@@ -129,8 +124,9 @@ function startSimulation(){
     //initialize
     prev_status_log = [];
     next_status_log = [];
+    log_text_history = [];
 
-    hs_status = new hiSpeedStatus(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs);
+    hs_status = new HiSpeedStatus(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs);
     showLogs();
 }
 

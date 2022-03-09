@@ -90,6 +90,8 @@
         <fieldset class="fieldset_status">
             <legend>Current Status</legend>
             <pre id="status"></pre>
+            <!--<button id="prev_status" style="position: absolute; bottom: 20px; right: 90px;" disabled>&#x21D0 prev</button>-->
+            <!--<button id="next_status" style="position: absolute; bottom: 20px; right: 20px;" disabled>next &#x21D2</button>-->
         </fieldset>
 
         <fieldset class="fieldset_action">
@@ -101,7 +103,7 @@
                 <pre>Start + <select id="key_type" style="width: 60px;">
                     <option value="1">Black</option>
                     <option value="-1">White</option>
-                </select> key * <input type="number" id="key_count" placeholder="count" style="width: 50px;"/> for <input type="number" id="press_times" placeholder="times"  style="width: 50px;"/> time(s) <button id="keyPress_action">Excute</button></pre>
+                </select> key * <input type="number" id="key_count" placeholder="count" min="1"  style="width: 50px;"/> for <input type="number" id="press_times" placeholder="times" min="1"  style="width: 50px;"/> time(s) <button id="keyPress_action">Excute</button></pre>
             </fieldset>
             <fieldset>
                 <pre>Start + Push/Pull Scratch(Movement:<input type="number" id="scr_movement" style="width: 50px;"/>) <button id="scratchPush_action">Excute</button></pre>
@@ -116,11 +118,15 @@
         
         <fieldset class="fieldset_log">
             <legend>Log</legend>
+            <button id="copy_log" style="margin-left: 10px;">Copy Log</button>
+            <label for="show_initial_and_action_only" style="float: right;font-size: 12px; right: 0;">show initial status and action(s) only</label>
+            <input type="checkbox" id="show_initial_and_action_only" style="float: right;">
             <textarea id="log_text_history" readonly></textarea>
         </fieldset>       
     </body>
 </html>
 
+<script src="Script/variables.js"></script>
 <script src="Script/hs_class.js"></script>
 <script src="Script/initial_event.js"></script>
 <script src="Script/action_event.js"></script>

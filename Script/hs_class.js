@@ -1,30 +1,8 @@
-const green_const = 174800;
-const white_const = 1000;
-let nhs_gear2green = {1:1200,
-    2:1000,
-    3:800,
-    4:700,
-    5:650,
-    6:600,
-    7:550,
-    8:500,
-    9:480,
-    10:460,
-    11:440,
-    12:420,
-    13:400,
-    14:380,
-    15:360,
-    16:340,
-    17:320,
-    18:300,
-    19:280,
-    20:260};
-
 //Calculate Formula
     //174800*(1000-白数字)/1000=BPM*HS*緑数字
     //HS=174800 * ((1000-白数字)/1000) / (BPM*緑数字)
-class hiSpeedStatus{
+
+class HiSpeedStatus{
     constructor(start_green_number, sudden, lift, bpm, hs, nhs_gear, curr_hsmode, vision_mode, using_chs){
         //sudden_enable: check if using sud+
         //lift_enable: check if using lift
@@ -54,7 +32,6 @@ class hiSpeedStatus{
         }
 
         //chs_enable: check if using CHS mode instead of NHS mode
-            //if chs_enable = false, that means there is using NHS mode
         this.chs_enable = using_chs;
         switch(curr_hsmode){
             case 0: // CHS mode
@@ -86,8 +63,6 @@ class hiSpeedStatus{
             default:break;
         }
         
-        //default_green_number:
-        //default_raw_green_number:
         //sudden: current sudden value
         //default_sudden: the default value of sudden
             //if never used sudden before, the default value will be 124
@@ -96,7 +71,6 @@ class hiSpeedStatus{
                 //e.g. after sudden closed, if lift value += N, default_sudden -= N
         //lift: current lift value
         //bpm: current BPM of song
-        //this.default_raw_green_number = 
         this.sudden = sudden;
         this.default_sudden = sudden;
         this.lift = lift;
@@ -107,15 +81,13 @@ class hiSpeedStatus{
         //0 = CHS, 1 = NHS, 2 = FHS
         this.hs_mode = curr_hsmode;
 
-        //this.rt = this.green_number * 100 / 60;
-
         this.curr_action = 'Simulation Start';
     }
 
     //Calculate Formula
     //Green Constant = 174800
     //White COnstant = 1000
-    //174800 * (1000-白数字)/1000=BPM*HS*緑数字
+    //174800 * (1000-白数字)/1000 = BPM * HS * 緑数字
     hsCalculate(){        
         let hs = green_const * ((white_const - (this.sudden + this.lift)) / white_const) / (this.bpm * this.green_number);
         return hs;
@@ -137,9 +109,7 @@ class hiSpeedStatus{
         return raw_green_number;
     }
 
-//function getKeyByValue(object, value) {
-//    return Number(Object.keys(object).find(key => object[key] === value));
-//}
+
     getClosetGear(green_number_with_no_sud){
         let closetNhs = Object.values(nhs_gear2green).reduce((a, b) => {
             return Math.abs(b - green_number_with_no_sud) < Math.abs(a - green_number_with_no_sud)? b : a;
@@ -192,7 +162,16 @@ class hiSpeedStatus{
         //Green Number Recalculate
     //key_type: -1=white key; 1=black key
     pressKey(key_type, key_count, times){
-        this.curr_action = 'Press ' + key_type==1?'Black' : 'White' + ' key * ' + key_count + ' for ' + times + 'time(s)';
+        this.curr_action = 'Press '
+        if(key_type == 1){
+            console.log(true);
+            this.curr_action += 'Black';
+        }
+        else{
+            console.log(false);
+            this.curr_action += 'White';
+        }
+        this.curr_action += ' key * ' + key_count + ' for ' + times + ' time(s)';
 
         switch(this.hs_mode){
             case 0://CHS
